@@ -1,0 +1,96 @@
+
+    <div class="dashboard_container clearfix" ng-controller"CreateController">
+            <div class="dashboard_section">
+                    <div class="sidenav">
+                        <div class="dashboard_logo_block">
+                            <a href="javascript:void(0)" class="moltin_logo"><img src="images/logonew.png"  alt=""></a>
+                            <a href="javascript:void(0)" class="moltin_logo_hidden"><img src="images/logo.png" alt=""></a>
+                        </div>
+                        <div id="main-menu" class="main-menu collapse navbar-collapse">
+                            <ul class="primary_menu">
+                                <li class="menu-item dropdown">
+                                    <a href="dashboard.html" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-home" aria-hidden="true"></i><p>Home</p></a>
+                                </li>
+                                <li class="menu-item dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clipboard" aria-hidden="true"></i><p>Posts</p></a>
+                                </li>
+                                <li class="menu-item dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-inbox" aria-hidden="true"></i><p>Flagged Posts</p></a>
+                                </li>
+                                <li class="menu-item dropdown">
+                                    <a href="" ng-click="vm.users()" class="dropdown-toggle"><i class="fa fa-clipboard"></i><p>Users</p></a>
+                                </li>
+
+                            </ul>
+                            <ul class="secondary_menu">
+                                <li class="menu-item dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i><p>Account</p></a>
+                                </li>
+                                <li class="menu-item dropdown">
+                                    <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sign-out" aria-hidden="true"></i><p>Log out</p></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+        <!--right-section-->
+
+
+    <div class="right_section">
+            <div class="header">
+                    <a href="javascript:void(0)" class="search_button-top"><input type="text" placeholder="search here"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </div>
+        <div class="form_body clearfix">
+            <div  class="form_container">
+                    <div class="create_form_container">
+                        <h3>Post Details</h3>
+                        <form class="create_form">
+                        <div class="create_form_input">
+                            <input class="input" type="text" name="name">
+                            <span class="focus-input"></span>
+                            <span class="label-input">Name</span>
+                        </div>
+
+
+                        <div class="create_form_input">
+                            <input class="input" type="text" name="slug">
+                            <span class="focus-input"></span>
+                            <span class="label-input">Slug</span>
+                        </div>
+
+                        <div class="create_form_input_description">
+                            <textarea class="input" rows="5" type="text" name="description"></textarea>
+                            <span class="focus-input"></span>
+                            <span class="label-input">Description</span>
+                        </div>
+                        <div class="create_form_input">
+
+                            <span class="focus-input"></span>
+                            <span class="label-input">Status</span>
+                            <select class="input" type="text" name="status">
+                            <option>draft</option>
+                            <option>live</option>
+                            </select>
+                        </div>
+
+                        <div class="create_form_input">
+                            <span class="focus-input"></span>
+                            <span class="label-input">Commodity Type</span>
+                            <select class="input" type="text" name="status">
+                            <option>physical</option>
+                            <option>digital</option>
+                            </select>
+                        </div>
+                        </form>
+
+                        <div class="creat-save-btn">
+                            <a href="javascript:void(0)" class="btn btn-default">SAVE</a>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+    </div>

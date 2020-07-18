@@ -1,0 +1,150 @@
+<!-- selection-section starts-->
+<div class="select_sec" ng-controller="HomeController">
+	<div class="container">
+		<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+		<div class="select_inr">
+			<div class="select_item" ng-class="{select_three: vm.country != 'United States' && vm.country != 'Canada' && vm.country != 'Country'}">
+				<div class="select_area">
+					<select name="number" class="block" ng-model="vm.country" ng-options="x for x in countries" ng-change="changeStateListInCtrl(vm.country);vm.state = states[0];vm.region = regions[0];" ng-init = "changeStateListInCtrl(vm.country);">
+					</select>
+				</div>
+				<div class="select_area" ng-show ="vm.country == 'United States' || vm.country == 'Canada' || vm.country == 'Country'">
+					<select name="number" class="block" ng-model="vm.state" ng-options="x for x in states" ng-change="changeListInCtrl(vm.state);" ng-init = "changeListInCtrl(vm.state)">
+					</select>
+				</div>
+				<div class="select_area">
+					<select name="number" id="region" class="block" ng-model="vm.region" ng-options="x for x in regions">
+					</select>
+				</div>
+				<div class="select_area">
+					<select name="number" id="category" class="block" ng-model="vm.category" ng-options="x for x in categories">
+					</select>
+				</div>
+				<div class="select_sbt">
+					<input type="submit" placeholder="Submit" ng-click ="vm.search()">
+				</div>
+				<div ng-show = "vm.savedPreference == true" class="loc_block">
+					<a href="" ng-click="vm.unlockPreference()"><i class="fa fa-lock"></i></a>
+				</div>
+				<div ng-hide = "vm.savedPreference == true" class="unloc_block">
+					<a href="" ng-click="vm.lockPreference()"><i class="fa fa-unlock"></i></a>
+				</div>
+			</div>
+			
+			<div class="add_post post_bk pages_button" ng-if="windowWidth > 991 && $root.user">
+				<input type="submit" value="LOG-OUT" ng-click="$root.logout()" style="background: #42a2e8; border: #f80101;">
+			</div>
+			<div class="add_post post_bk pages_button" ng-if="windowWidth > 991 && $root.user">
+				<input type="submit" value="MY ACCOUNT" ng-click="$root.open_myaccount()" style="background: #42a2e8; border: #f80101;">
+			</div>
+			<div class="add_post post_bk login_signup pages_button" ng-if="windowWidth > 991 && !$root.user">
+				<input type="submit" value="LOG-IN/SIGN-UP" ng-click="$root.open_login()" style="background: #42a2e8; border: #f80101;">
+			</div>
+			<div class="add_post post_bk pages_button" ng-if="windowWidth > 991">
+				<input type="submit" value="PAGES" ng-click="$root.open_pages()" style="background: #f80101; border: #f80101;">
+			</div>
+
+
+			<div class="add_post post_bk">
+				<input type="submit" value="Post an AD" ng-click="$root.open_post()">
+			</div>
+			<div class="add_post post_bk pages_button" ng-if="windowWidth < 991">
+				<input type="submit" value="PAGES" ng-click="$root.open_pages()" style="background: #f80101; border: #f80101;">
+			</div>
+			<div class="add_post post_bk login_signup pages_button" ng-if="windowWidth < 991 && !$root.user">
+				<input type="submit" value="LOG-IN/SIGN-UP" ng-click="$root.open_login()" style="background: #42a2e8; border: #f80101;">
+			</div>
+			<div class="add_post post_bk pages_button" ng-if="windowWidth < 991 && $root.user">
+				<input type="submit" value="MY ACCOUNT" ng-click="$root.open_myaccount()" style="background: #42a2e8; border: #f80101;">
+			</div>
+			<div class="add_post post_bk pages_button" ng-if="windowWidth < 991 && $root.user">
+				<input type="submit" value="LOG-OUT" ng-click="$root.logout()" style="background: #42a2e8; border: #f80101;">
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- selection-section ends-->
+<div ng-controller="ProfileController" id="Profile">
+	<div class="post-container">
+		<!-- <div class="search-container">
+			<input type="text" placeholder="Search Posts" ng-model="searchText">
+		</div> -->
+		<div class="bread_cnt">
+	      	<ol class="breadcrumb">
+	        	<li class="breadcrumb-item"><a href="pages">My account</a></li>
+	        	<li class="breadcrumb-item"><a href="/"><strong>Personals</strong></a></li>
+	      	</ol>
+	    </div>
+		<div class="post-tab-wrapper">
+			<div class="post-tab" ng-click="set_tab(1);" ng-class="{active: tab==1}">
+				<h2>Personals</h2>
+			</div>
+			<div class="post-tab" ng-click="set_tab(2);" ng-class="{active: tab==2}">
+				<h2>Pages</h2>
+			</div>
+			<div class="post-tab" ng-click="set_tab(3);" ng-class="{active: tab==3}">
+				<h2>Settings</h2>
+			</div>
+		</div>
+		<div class="post-wrapper" ng-if="tab==1">
+			<div class="post-item" ng-repeat="post in posts">
+				<div class="post-inner">
+					<div class="post-img">
+						<img src="/" ng-if="post.files.length" ng-src="{{post.files[0].secure_url}}">
+					</div>
+					<div class="post-info">
+						<div class="post-title">
+							<h4>{{post.title||post.body}}</h4>
+						</div>
+						<div class="post-descript">
+							<time am-time-ago="post.created"></time>
+						</div>
+						<div class="post-action">
+							<a href="/edit/{{post._id}}">Edit</a>
+							<a ng-click="delete(post)">Delete</a>
+							<a href="/detail/{{post._id}}">Open</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="post-wrapper" ng-if="tab==2">
+			<div class="post-item" ng-repeat="page in pages">
+				<div class="post-inner">
+					<div class="post-img">
+						<img ng-src="{{page.profilePic}}" ng-if="page.profilePic">
+					</div>
+					<div class="post-info">
+						<div class="post-title">
+							<h4>{{page.title||page.body}}</h4>
+						</div>
+						<div class="post-descript">
+							<time am-time-ago="page.created"></time>
+						</div>
+						<div class="post-action">
+							<a ng-click="deletePage(page)">Delete</a>
+							<a href="/{{page.url}}">Open</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="set-container-inner" ng-if="tab==3">
+			<div class="profile-info">
+				<div class="set-password">
+					<h3 style="font-weight: bold;">Change password</h3>
+					<input type="password" placeholder="Your old password" ng-model="user.oldPass" style="margin-bottom: 20px;">
+            		<input type="password" placeholder="Confirm password" ng-model="user.newPass">
+	            	<div class="innr_btn">
+						<input type="submit" class="cust_btn" value="Submit" ng-click="changePassword();">
+					</div>
+	            </div>
+	        </div>
+	        <!-- <div class="createPage-container">
+	        	<a ng-href="{{ $root.user ? 'post?page' : ''}}">Create page</a>
+	        </div> -->
+		</div>
+	</div>
+</div>
+
