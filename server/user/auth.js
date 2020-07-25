@@ -49,6 +49,7 @@ module.exports = function (sd) {
 		if (!json.data) json.data = {};
 		res.json(json);
 	});
+	
 	router.post("/status", function (req, res) {
 		if (req.user) {
 			let user = JSON.parse(JSON.stringify(req.user));

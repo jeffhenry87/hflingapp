@@ -154,11 +154,11 @@ app.controller('DetailController', ['$rootScope','$scope','$location','HttpServi
 			// alert("Please Select, Region and Category.");
 		}
 
-		if( $scope.captcha == undefined ){
-			FlashService.Error("Please select the Capcha!");
-			$window.scrollTo(0, 0);
-			return;
-		}
+		// if( $scope.captcha == undefined ){
+		// 	FlashService.Error("Please select the Capcha!");
+		// 	$window.scrollTo(0, 0);
+		// 	return;
+		// }
 		$scope.commentmessage = document.getElementById('commentmessage').value;
 		if( $scope.commentmessage == undefined || $scope.commentmessage == '' ){
 			FlashService.Error("Please enter the comment!");
