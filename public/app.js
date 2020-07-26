@@ -1,5 +1,14 @@
 var app = angular.module('app', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'angularMoment', 'vcRecaptcha', '720kb.socialshare', 'me-lazyload' ]);
 
+var env = {};
+
+// Import variables if present (from env.js)
+if(window){  
+  Object.assign(env, window.__env);
+}
+
+app.constant('__env', env);
+
 app.service('MetaService', function() {
   var title = 'Healthy Fling';
   var description = 'Your new favorite personals site to create, search and reply to personal ads.';
@@ -224,6 +233,7 @@ app.config(['$routeProvider', '$locationProvider',function($routeProvider, $loca
 app.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist(['**']);
 });
+
 function testInterceptor($window, $rootScope) {
   return {
     request: function(config) {
@@ -251,6 +261,7 @@ function testInterceptor($window, $rootScope) {
     }
   }
 }
+
 app.factory('testInterceptor', testInterceptor).config(function($httpProvider) {
     $httpProvider.interceptors.push('testInterceptor');
 });

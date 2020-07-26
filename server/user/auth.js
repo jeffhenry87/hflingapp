@@ -60,6 +60,7 @@ module.exports = function (sd) {
 				user: user
 			});
 		}
+
 		User.findOne({
 			$or: [{
 				reg_email: req.body.email.toLowerCase()
@@ -103,6 +104,7 @@ module.exports = function (sd) {
 			res.json(json);
 		});
 	});
+	
 	router.post("/request", function (req, res) {
 		User.findOne({
 			email: req.body.email.toLowerCase()
@@ -127,6 +129,7 @@ module.exports = function (sd) {
 			});
 		});
 	});
+
 	router.post("/change", function (req, res) {
 		User.findOne({
 			email: req.body.email.toLowerCase()
@@ -159,6 +162,7 @@ module.exports = function (sd) {
 			});
 		});
 	});
+
 	router.post("/changePassword", sd.ensure, function (req, res) {
 		sd.User.findOne({
 			_id: req.user._id
@@ -171,14 +175,17 @@ module.exports = function (sd) {
 			} else res.json(false);
 		});
 	});
+
 	router.get('/logout', function (req, res) {
 		req.logout();
 		res.redirect('/');
 	});
+
 	router.get('/logout-local', function (req, res) {
 		req.logout();
 		res.json(true);
 	});
+
 	/*
 	*	Passport Management
 	*/
@@ -190,6 +197,7 @@ module.exports = function (sd) {
 		delete user.recUntil;
 		res.json(user);
 	});
+
 	passport.use('login-local', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password'
@@ -201,11 +209,19 @@ module.exports = function (sd) {
 			}
 		}, function (err, user) {
 			if (err) return done(err);
-			if (!user) return done(null, false);
-			if (!user.validPassword(password)) return done(null, false);
+			
+			if (!user) {
+				return done(null, false, {"message": "wrongEmail"});
+			}
+			
+			if (!user.validPassword(password)) {
+				return done(null, false, { message: 'Incorrect password.' });
+			}
+
 			return done(null, user);
 		});
 	}));
+
 	router.post('/signup-local', function (req, res, next) {
 		if (req.session.resetPin == req.body.code) {
 			next();
@@ -221,6 +237,7 @@ module.exports = function (sd) {
 		delete user.recUntil;
 		res.json(user);
 	});
+
 	passport.use('signup', new LocalStrategy({
 		usernameField: 'email',
 		passwordField: 'password',
