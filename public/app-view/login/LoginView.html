@@ -25,7 +25,7 @@
 		</form>
 	</div>
 
-	<div id="signUpSectionId" ng-if="sign && !reset">
+	<div id="signUpSectionId" ng-show="sign && !reset">
 		<button type="button" class="modal_close" ng-click="closeModal();"><i class="fa fa-times-circle"></i></button>
 		<div class="add_hdr flag_hdr">
 			<h3 style="font-weight: bold;">Sign Up</h3><br>
@@ -41,6 +41,10 @@
 
 			<input type="text" ng-show="verify" ng-model="user.code" placeholder="Code from email" style="border: 2px solid #b1b1b1; width: 80%; margin-top: 10px;">
 
+			<div ng-show="!verify" class="pdL" style="margin-top: 10px">
+                <div class="reply_item" vc-recaptcha key="'6LdK608UAAAAAIIPni45gUqw9p_vn4mLa_CtlSlv'" ng-model="captcha"></div>
+			</div>
+			
 			<div class="response_btn_area">
 
 				<button type="button" class="cust_btn" ng-show="!verify" ng-click="toggle()">Back</button>

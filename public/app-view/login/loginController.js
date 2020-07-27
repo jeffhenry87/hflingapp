@@ -81,7 +81,7 @@ app.controller('LoginController', ['$rootScope','$scope', 'HttpService', 'FlashS
 			return alert("Please fill your password");
 		}
 
-		if($scope.user.password != rePassword && $scope.verify) {
+		if(($scope.user.password != rePassword) && !$scope.verify) {
 				return alert("Password does not match");
 		}
 
@@ -91,6 +91,11 @@ app.controller('LoginController', ['$rootScope','$scope', 'HttpService', 'FlashS
 
 		if(!validateEmail($scope.user.email)) {
 			return alert("Seems like your email is incorrect");
+		}
+
+		if(!$scope.captcha) {
+			alert("Please select the Capcha!");
+			return;
 		}
 
 		if(!$scope.verify) { 
