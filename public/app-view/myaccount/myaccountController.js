@@ -4,6 +4,55 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
     $rootScope.metaservice = MetaService;
     $rootScope.metaservice.set();
 
+    let statusStyle = {
+        "background-color": "aqua", 
+        "max-width": "fit-content", 
+        "padding": "4px", 
+        "color": "white"
+    };
+
+    $scope.getStatusStyle = function(item) {
+        switch(item.status.toLowerCase()) {
+            case 'active'://env
+                statusStyle['background-color'] = '#22b14c';//env
+                break;
+            case 'flagged'://env
+                statusStyle['background-color'] = '#ed1c24';//env
+                break;
+            case 'inactive'://env
+                statusStyle['background-color'] = "#00a2e8";//env
+                break;
+            default:
+                statusStyle['background-color'] = '#7f7f7f';//env
+                break;
+        }
+        return statusStyle;
+    }
+
+    $scope.changeCase = function(item) {
+        
+        if(item.status == 'inactive') {//env
+            return 'Deleted';//env
+        }
+
+        if(item.status == 'active' && isExpired(item.created)) {
+            return 'Expired';//env
+        }
+
+        return item.status[0].toUpperCase() + item.status.substring(1);
+    }
+
+    let isExpired = function(createdDate) {
+        // let date = new Date().getTime();
+        // let cDate = new Date(createdDate).getTime();
+        // let difDate = (date - cDate)/(1000*60*60*24);
+        if($scope.diffDate(createdDate) > 7) {
+            return true;
+        }
+
+        return false;
+    }
+
     $scope.diffDate = function(date1) {
       var dateFirst = new Date(date1);
       var dateSecond = new Date();

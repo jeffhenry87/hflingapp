@@ -35,7 +35,7 @@ module.exports = mongoose.model('Comment', new Schema({
       type: Number,
       default: 0
     },
-    flagreason: String,
+    flagreason: [String],
     created: {
         type: Date,
         default: Date.now
