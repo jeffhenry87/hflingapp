@@ -1,4 +1,4 @@
-app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'HttpService', '$http','$window', 'FlashService', 'MetaService', function( $rootScope,$scope,$location,HttpService,$http,$window,FlashService, MetaService ){
+app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'HttpService', '$http','$window', 'FlashService', 'MetaService', '__env', function( $rootScope,$scope,$location,HttpService,$http,$window,FlashService, MetaService, __env ){
     var vm = this;
 
     $rootScope.metaservice = MetaService;
@@ -13,13 +13,13 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
 
     $scope.getStatusStyle = function(item) {
         switch(item.status.toLowerCase()) {
-            case 'active'://env
+            case __env.status.ACTIVE:
                 statusStyle['background-color'] = '#22b14c';//env
                 break;
-            case 'flagged'://env
+            case __env.status.FLAGGED:
                 statusStyle['background-color'] = '#ed1c24';//env
                 break;
-            case 'inactive'://env
+            case __env.status.INACTIVE:
                 statusStyle['background-color'] = "#00a2e8";//env
                 break;
             default:
@@ -31,12 +31,12 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
 
     $scope.changeCase = function(item) {
         
-        if(item.status == 'inactive') {//env
-            return 'Deleted';//env
+        if(item.status == __env.status.INACTIVE) {
+            return __env.status.DELETED[0].toUpperCase() + __env.status.DELETED.substring(1);
         }
 
-        if(item.status == 'active' && isExpired(item.created)) {
-            return 'Expired';//env
+        if(item.status == __env.status.ACTIVE && isExpired(item.created)) {
+            return __env.status.EXPIRED[0].toUpperCase() + __env.status.EXPIRED.substring(1);
         }
 
         return item.status[0].toUpperCase() + item.status.substring(1);
@@ -46,7 +46,7 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
         // let date = new Date().getTime();
         // let cDate = new Date(createdDate).getTime();
         // let difDate = (date - cDate)/(1000*60*60*24);
-        if($scope.diffDate(createdDate) > 7) {
+        if($scope.diffDate(createdDate) > __env.expirationDays) {
             return true;
         }
 
