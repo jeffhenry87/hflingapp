@@ -48,7 +48,7 @@
     "regexp-clone": "^1.0.0",
     "rendertron-middleware": "^0.1.5",
     "request": "~2.88.0",
-    "sharp": "^0.23.4",
+    "sharp": "^0.23.0",
     "sliced": "^1.0.1",
     "uid-safe": "^2.1.5"
   }
