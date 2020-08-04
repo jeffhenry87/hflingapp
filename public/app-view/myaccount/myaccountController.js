@@ -14,6 +14,10 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
     $scope.getStatusStyle = function(item) {
         switch(item.status.toLowerCase()) {
             case __env.status.ACTIVE:
+                if(isExpired(item.created)) {
+                    statusStyle['background-color'] = '#7f7f7f';
+                    break;
+                }
                 statusStyle['background-color'] = '#22b14c';//env
                 break;
             case __env.status.FLAGGED:
