@@ -221,7 +221,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         $scope.showRequiredCategoryError = false;
         $scope.showMessageError = false;
         $scope.showTitleError = false;
-        $scope.showCaptchaError = false;
+        // $scope.showCaptchaError = false;
 
         $scope.showError = true;
         if ($rootScope.imageList && $rootScope.imageList.length > 10) {
@@ -253,10 +253,10 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
             $scope.showMessageError = true;
             // alert("Please enter title of the post.");
         }
-        if (!$scope.captcha){
-            $scope.showCaptchaError = true;
-            // alert("Please accept the terms and condition.");
-        }
+        // if (!$scope.captcha){
+        //     $scope.showCaptchaError = true;
+        //     // alert("Please accept the terms and condition.");
+        // }
 
         if (($scope.haircolor == 'Hair Color')){
             $scope.haircolor = "";
@@ -416,7 +416,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         $scope.showImageError = false;
         $scope.showMessageError = false;
         $scope.showTitleError = false;
-        $scope.showCaptchaError = false;
+        // $scope.showCaptchaError = false;
 
         $scope.showError = true;
         if ($rootScope.imageList && $rootScope.imageList.length > 10) {
@@ -432,10 +432,10 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
             $scope.showMessageError = true;
             // alert("Please enter title of the post.");
         }
-        if (!$scope.captcha){
-            $scope.showCaptchaError = true;
-            // alert("Please accept the terms and condition.");
-        }
+        // if (!$scope.captcha){
+        //     $scope.showCaptchaError = true;
+        //     // alert("Please accept the terms and condition.");
+        // }
 
         if($scope.showMessageError || $scope.showImageError || $scope.showTitleError){
 

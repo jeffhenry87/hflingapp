@@ -193,7 +193,7 @@ app.controller('ReplyController', ['$rootScope','$scope', '$location', 'HttpServ
       }
     };
 
-    $scope.notify = function (email, confirmemail, replymessage, captcha) {
+    $scope.notify = function (email, confirmemail, replymessage) { //, captcha
         $scope.imageLength = 0;
 
         $scope.showError = true;
@@ -202,7 +202,7 @@ app.controller('ReplyController', ['$rootScope','$scope', '$location', 'HttpServ
         $scope.showEmailError = false;
         $scope.showImageError = false;
 
-        $scope.showCaptchaError = false;
+        // $scope.showCaptchaError = false;
 
         if ($rootScope.tempImageList && $rootScope.tempImageList.length > 5) {
             $scope.showImageError = true;
@@ -221,17 +221,19 @@ app.controller('ReplyController', ['$rootScope','$scope', '$location', 'HttpServ
             // alert("Please Select, Region and Category.");
         }
 
-        if (!captcha){
-            $scope.showCaptchaError = true;
-            // alert("Please accept the terms and condition.");
-        }
+        // if (!captcha){
+        //     $scope.showCaptchaError = true;
+        //     // alert("Please accept the terms and condition.");
+        // }
 
         if (email != confirmemail){
             $scope.showEmailError = true;
             // alert("Please accept the terms and condition.");
         }
 
-        if ($scope.showCaptchaError || $scope.showRequiredEmailError || $scope.showRequiredReplyMessageError || $scope.showEmailError){
+        if (
+            // $scope.showCaptchaError || 
+            $scope.showRequiredEmailError || $scope.showRequiredReplyMessageError || $scope.showEmailError){
             $window.scrollTo(0, 0);
         }else{
             // $rootScope.loading = true;

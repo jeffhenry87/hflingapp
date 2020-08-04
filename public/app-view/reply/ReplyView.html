@@ -14,7 +14,7 @@
             <p ng-if = "showRequiredEmailError">- Please enter a valid email.</p>
             <p ng-if = "showRequiredReplyMessageError">- Please enter body of the message.</p>
             <p ng-if = "showEmailError">- Your verification email doesn't match</p>
-            <p ng-if = "showCaptchaError">- Please accept the Recaptcha</p>
+            <!-- <p ng-if = "showCaptchaError">- Please accept the Recaptcha</p> -->
             <p ng-if = "showImageError">- Selected {{imageLength}} images ... Max allowed images is 5.</p>
           </div>
           <div class="bio_sec">
@@ -56,14 +56,14 @@
                   </div>
                 </div>
 
-                <div class="form-group pdL">
+                <!-- <div class="form-group pdL">
                     <div class="reply_item" vc-recaptcha key="'6LdK608UAAAAAIIPni45gUqw9p_vn4mLa_CtlSlv'" ng-model="captcha"></div>
-                </div>
+                </div> -->
 
                 <!-- Form actions -->
                 <div class="form-group pdL">
                   <div class="reply_item text-left">
-                    <button type="submit" class="btn btn-primary btn-lg" ng-click="notify(email, confirmemail, replymessage, captcha);">Submit</button>
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="notify(email, confirmemail, replymessage);">Submit</button> <!--, captcha -->
                   </div>
                 </div>
               </form>

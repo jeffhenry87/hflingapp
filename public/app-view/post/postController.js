@@ -393,7 +393,7 @@ app.controller("PostController", [
       vm.showRequiredCategoryError = false;
       vm.showMessageError = false;
       vm.showTitleError = false;
-      vm.showCaptchaError = false;
+      // vm.showCaptchaError = false;
       vm.showAgeError = false;
 
       vm.showError = true;
@@ -432,10 +432,10 @@ app.controller("PostController", [
         vm.showMessageError = true;
         // alert("Please enter title of the post.");
       }
-      if (!vm.captcha) {
-        vm.showCaptchaError = true;
-        // alert("Please accept the terms and condition.");
-      }
+      // if (!vm.captcha) {
+      //   vm.showCaptchaError = true;
+      //   // alert("Please accept the terms and condition.");
+      // }
 
       if (vm.data.age && isNaN(vm.data.age)) {
         vm.showAgeError = true;
@@ -508,7 +508,7 @@ app.controller("PostController", [
         vm.showAgeError ||
         vm.showRequiredCategoryError ||
         vm.showMessageError ||
-        vm.showCaptchaError ||
+        // vm.showCaptchaError ||
         vm.showImageError ||
         vm.showTitleError
       ) {
@@ -656,7 +656,7 @@ app.controller("PostController", [
       vm.showMessageError = false;
       vm.showTitleError = false;
       vm.showPageTitleError = false;
-      vm.showCaptchaError = false;
+      // vm.showCaptchaError = false;
 
       vm.showError = true;
 
@@ -679,10 +679,10 @@ app.controller("PostController", [
         vm.showMessageError = true;
         // alert("Please enter title of the post.");
       }
-      if (!vm.captcha) {
-        vm.showCaptchaError = true;
-        // alert("Please accept the terms and condition.");
-      }
+      // if (!vm.captcha) {
+      //   vm.showCaptchaError = true;
+      //   // alert("Please accept the terms and condition.");
+      // }
 
       if (!$scope.page) {
         $scope.page = {};
@@ -692,7 +692,7 @@ app.controller("PostController", [
         vm.showPageTitleError ||
         vm.showTitleError ||
         vm.showMessageError ||
-        vm.showCaptchaError ||
+        // vm.showCaptchaError ||
         vm.showImageError
       ) {
         $window.scrollTo(0, 0);
