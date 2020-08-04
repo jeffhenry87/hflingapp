@@ -92,6 +92,7 @@
           <a ng-if = "owner" style="margin-left: 5px;" href="edit/{{post_id}}">Edit</a>
           <a ng-if = "owner" style="margin-left: 5px;" ng-click="delete()" href="">Delete</a>
           <a href="" ng-if ="share == 'enabled'" style="margin-left: 5px;" ng-click="toggleShareButton();">Share</a>
+          <a href="" ng-if="status" ng-style="getStatusStyle(status)" >{{changeCase(status)}}</a>
           <a href="" ng-click="openModal_subscribe()" style="background: none;"><h2 style="padding-top: 8px; color: gold;">★</h2></a>
         </div>
         <div ng-show="showShareButtons == true">

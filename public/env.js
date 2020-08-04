@@ -12,7 +12,8 @@
         INACTIVE: "inactive",
         FLAGGED: "flagged",
         DELETED: "deleted",
-        EXPIRED: "expired"
+        EXPIRED: "expired",
+        LIVE: "live"
     };
 
     window.__env["expirationDays"] = 7;

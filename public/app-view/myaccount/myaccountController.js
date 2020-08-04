@@ -39,8 +39,12 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
             return __env.status.DELETED[0].toUpperCase() + __env.status.DELETED.substring(1);
         }
 
-        if(item.status == __env.status.ACTIVE && isExpired(item.created)) {
-            return __env.status.EXPIRED[0].toUpperCase() + __env.status.EXPIRED.substring(1);
+        if(item.status == __env.status.ACTIVE) { 
+            if(isExpired(item.created)) {
+                return __env.status.EXPIRED[0].toUpperCase() + __env.status.EXPIRED.substring(1);
+            } else {
+                return __env.status.LIVE[0].toUpperCase() + __env.status.LIVE.substring(1);
+            }
         }
 
         return item.status[0].toUpperCase() + item.status.substring(1);

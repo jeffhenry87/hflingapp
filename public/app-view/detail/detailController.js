@@ -1,5 +1,12 @@
-app.controller('DetailController', ['$rootScope','$scope','$location','HttpService','$http','$route','FlashService','$document','$modal','$window', '$routeParams', 'MetaService', function( $rootScope,$scope,$location,HttpService,$http,$route,FlashService,$document,$modal,$window, $routeParams, MetaService){
+app.controller('DetailController', ['$rootScope','$scope','$location','HttpService','$http','$route','FlashService','$document','$modal','$window', '$routeParams', 'MetaService', '__env', function( $rootScope,$scope,$location,HttpService,$http,$route,FlashService,$document,$modal,$window, $routeParams, MetaService, __env){
 	var vm = this;
+	let statusStyle = {
+        "background-color": "aqua", 
+        "max-width": "fit-content", 
+        "padding": "2px", 
+		"color": "white",
+		"margin-left": '5px'
+    };
 
 	if($rootScope.visitedSearchPage){
 		$rootScope.loading = true;
@@ -840,5 +847,67 @@ vm.logout = function () {
 	// }else{
 	//  $location.path("/");
 	// }
+
+
+	$scope.getStatusStyle = function(status) {
+        switch(status.toLowerCase()) {
+            case __env.status.ACTIVE:
+                if(isExpired($scope.created)) {
+                    statusStyle['background-color'] = '#7f7f7f';
+                    break;
+                }
+                statusStyle['background-color'] = '#22b14c';//env
+                break;
+            case __env.status.FLAGGED:
+                statusStyle['background-color'] = '#ed1c24';//env
+                break;
+            case __env.status.INACTIVE:
+                statusStyle['background-color'] = "#00a2e8";//env
+                break;
+            default:
+                statusStyle['background-color'] = '#7f7f7f';//env
+                break;
+        }
+        return statusStyle;
+    }
+
+    $scope.changeCase = function(status) {
+        
+        if(status == __env.status.INACTIVE) {
+            return __env.status.DELETED[0].toUpperCase() + __env.status.DELETED.substring(1);
+        }
+
+        if(status == __env.status.ACTIVE) { 
+            if(isExpired($scope.created)) {
+                return __env.status.EXPIRED[0].toUpperCase() + __env.status.EXPIRED.substring(1);
+            } else {
+                return __env.status.LIVE[0].toUpperCase() + __env.status.LIVE.substring(1);
+            }
+        }
+
+        return status[0].toUpperCase() + status.substring(1);
+    }
+
+    let isExpired = function(createdDate) {
+        // let date = new Date().getTime();
+        // let cDate = new Date(createdDate).getTime();
+        // let difDate = (date - cDate)/(1000*60*60*24);
+        if($scope.diffDate(createdDate) > __env.expirationDays) {
+            return true;
+        }
+
+        return false;
+    }
+
+    $scope.diffDate = function(date1) {
+      var dateFirst = new Date(date1);
+      var dateSecond = new Date();
+
+      // time difference
+      var timeDiff = Math.abs(dateSecond.getTime() - dateFirst.getTime());
+
+      // days difference
+      return (Math.ceil(timeDiff / (1000 * 3600 * 24)));
+    }
 
 }]);
