@@ -6,7 +6,7 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
 
     let statusStyle = {
         "background-color": "aqua", 
-        "max-width": "fit-content", 
+        "max-width": "60px", 
         "padding": "4px", 
         "color": "white",
 		"text-align": 'center'
