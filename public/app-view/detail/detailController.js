@@ -3,9 +3,10 @@ app.controller('DetailController', ['$rootScope','$scope','$location','HttpServi
 	let statusStyle = {
         "background-color": "aqua", 
         "max-width": "fit-content", 
-        "padding": "2px", 
+        // "padding": "2px", 
 		"color": "white",
-		"margin-left": '5px'
+		"margin-left": '5px',
+		"text-align": 'center'
     };
 
 	if($rootScope.visitedSearchPage){

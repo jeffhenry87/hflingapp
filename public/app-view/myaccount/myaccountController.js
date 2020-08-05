@@ -8,7 +8,8 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
         "background-color": "aqua", 
         "max-width": "fit-content", 
         "padding": "4px", 
-        "color": "white"
+        "color": "white",
+		"text-align": 'center'
     };
 
     $scope.getStatusStyle = function(item) {
