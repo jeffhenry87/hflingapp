@@ -41,13 +41,13 @@ exports.upload_images_to_local = function(req, res) {
 		}
 		if (req.query.original) {
 			sharp(file).resize({ width: 1200 }).toFile(file.replace('files', 'processed')).then(function(newFileInfo) {
-				res.json({"secure_url": 'https://www.healthyfling.com/processed/' + local_file_path});
+				res.json({"secure_url": req.headers.origin + '/processed/' + local_file_path});
 			}).catch(function(err) {
 				return res.end("Sharp Failed from Origin");
 			});
 		} else {
 			sharp(file).resize({ width: 500 }).toFile(file.replace('files', 'processed')).then(function(newFileInfo) {
-				res.json({"secure_url": 'https://www.healthyfling.com/processed/' + local_file_path});
+				res.json({"secure_url": req.headers.origin + '/processed/' + local_file_path});
 			}).catch(function(err) {
 				return res.end("Sharp Failed");
 			});

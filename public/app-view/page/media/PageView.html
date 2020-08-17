@@ -214,13 +214,13 @@
       </div>
       <div class="add_cnt">
         <div ng-show="postData">
-            <div class="row1">
-              <div class="column1" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize">
+            <div class="row1New">
+              <div class="columnNew" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize">
                 <a style="width: 100%" ng-if="item.image" href="{{pageData['url']}}/media/photo/{{item._id}}">
-                    <img style="width: 100%" src="{{item.image}}">
+                    <img src="{{item.image}}">
                 </a>
                 <a style="width: 100%" ng-if="item.video" href="{{pageData['url']}}/media/video/{{item.postId}}">
-                    <img style="width: 100%" src="/app-content/images/video-placeholder.png">
+                    <img src="/app-content/images/video-placeholder.png">
                 </a>
               </div>
             </div>

@@ -51,7 +51,7 @@ app.controller('MyaccountController', ['$rootScope','$scope', '$location', 'Http
         return item.status[0].toUpperCase() + item.status.substring(1);
     }
 
-    let isExpired = function(createdDate) {
+    var isExpired = function(createdDate) {
         // let date = new Date().getTime();
         // let cDate = new Date(createdDate).getTime();
         // let difDate = (date - cDate)/(1000*60*60*24);

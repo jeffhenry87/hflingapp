@@ -75,7 +75,7 @@ app.controller('LoginController', ['$rootScope','$scope', 'HttpService', 'FlashS
 	};
 
 	$scope.signup = function() {
-		let rePassword = document.getElementById('rePasswordId').value;
+		var rePassword = document.getElementById('rePasswordId').value;
 
 		if(!$scope.user.password && $scope.verify) {
 			return alert("Please fill your password");
@@ -158,7 +158,7 @@ app.controller('LoginController', ['$rootScope','$scope', 'HttpService', 'FlashS
 		}
 	}
 
-	let changePassword = function() {
+	var changePassword = function() {
 		HttpService.change($scope.user, function(resp){
 			if(resp.message=='done'){
 				HttpService.login($scope.user, signed);

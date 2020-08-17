@@ -188,8 +188,8 @@
       </div>
       <div class="add_cnt">
         <div ng-show="postData">
-            <div class="row1">
-              <div class="column1" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize">
+            <div class="row1New">
+              <div class="columnNew" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize">
                 <a style="width: 100%" href="/page/{{pageData.url}}/post/{{item.postId}}"><img style="width: 100%" ng-if="item.image" src="{{item.image}}"><img style="width: 100%" ng-if="item.video" src="/app-content/images/video-placeholder.png"></a>
               </div>
             </div>

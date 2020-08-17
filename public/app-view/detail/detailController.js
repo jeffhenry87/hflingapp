@@ -1,6 +1,6 @@
 app.controller('DetailController', ['$rootScope','$scope','$location','HttpService','$http','$route','FlashService','$document','$modal','$window', '$routeParams', 'MetaService', '__env', function( $rootScope,$scope,$location,HttpService,$http,$route,FlashService,$document,$modal,$window, $routeParams, MetaService, __env){
 	var vm = this;
-	let statusStyle = {
+	var statusStyle = {
         "background-color": "aqua", 
         "max-width": "fit-content", 
         // "padding": "2px", 
@@ -889,7 +889,7 @@ vm.logout = function () {
         return status[0].toUpperCase() + status.substring(1);
     }
 
-    let isExpired = function(createdDate) {
+    var isExpired = function(createdDate) {
         // let date = new Date().getTime();
         // let cDate = new Date(createdDate).getTime();
         // let difDate = (date - cDate)/(1000*60*60*24);
