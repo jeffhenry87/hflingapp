@@ -215,25 +215,23 @@
       <div class="add_cnt">
         <div ng-show="postData">
             <div class="row1New">
-              <div class="columnNew" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize">
-                <a style="width: 100%" ng-if="item.image" href="{{pageData['url']}}/media/photo/{{item._id}}">
-                    <img src="{{item.image}}">
-                </a>
-                <a style="width: 100%" ng-if="item.video" href="{{pageData['url']}}/media/video/{{item.postId}}">
-                    <img src="/app-content/images/video-placeholder.png">
-                </a>
+              <div class="columnNew" style="display: flex; flex-wrap: wrap;">
+
+                <div id="mediaCarouselId" ng-repeat="data in postData" ng-if="data.files.length">
+                  <carousel>
+                    <slide ng-repeat="slide in data.files">
+                      <a ng-if="!slide.video" href="{{pageData['url']}}/media/photo/{{slide._id}}">
+                        <img ng-src="{{slide.secure_url}}">
+                      </a>
+                      <a style="width: 100%" ng-if="slide.video" href="{{pageData['url']}}/media/video/{{slide.postId}}">
+                        <img src="/app-content/images/video-placeholder.png">
+                    </a>
+                    </slide>
+                  </carousel>
+                </div>
+
               </div>
             </div>
-
-
-            <!-- <div class="container-fluid">
-              <div class="row">
-                <div class="col-sm-3" style="max-width: 300px; padding: 20px;" ng-repeat="item in gallery | startFrom: vm.currentPage * vm.pageSize | limitTo: vm.pageSize | filter: searchText">
-                    <a href="/page/{{pageData.url}}/post/{{item.postId}}"><img style="width: 100%" ng-if="item.image" src="{{item.image}}"><img style="width: 100%" ng-if="item.video" src="/app-content/images/video-placeholder.png"></a>
-                </div>
-              </div>
-            </div> -->
-
         </div>
          <div ng-hide="postData">
             <h3 style="margin-bottom: 30px;">No record found!</h3>

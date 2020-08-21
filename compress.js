@@ -7,7 +7,21 @@ const cssnano = require('@node-minify/cssnano');
 
 minify({
   compressor: uglifyjs,
-  input: ['./public/app-lib/jquery-1.11.1.min.js', './public/app-lib/jquery-2.1.4.min.js', './public/app-lib/bootstrap.min.js', './public/app-lib/jquery-ui.min.js', './public/app-lib/custom.js', './public/app-lib/angular.min.js', './public/app-lib/ui-bootstrap-tpls.min.js','./public/app-lib/angular-route.min.js', './public/app-lib/angular-cookies.min.js', './public/app-lib/moment.min.js', './public/app-lib/angular-moment.min.js', './public/app-lib/angular-recaptcha.min.js', './public/app-lib/angular-socialshare.min.js', './public/app-lib/me-lazyload.min.js'],
+  input: ['./public/app-lib/jquery-1.11.1.min.js', 
+  './public/app-lib/jquery-2.1.4.min.js', 
+  './public/app-lib/bootstrap.min.js', 
+  './public/app-lib/jquery-ui.min.js', 
+  './public/app-lib/custom.js', 
+  './public/app-lib/angular.min.js', 
+  './public/app-lib/ui-bootstrap-tpls.min.js', 
+  './public/app-lib/angular-route.min.js', 
+  './public/app-lib/angular-cookies.min.js', 
+  './public/app-lib/moment.min.js', 
+  './public/app-lib/angular-moment.min.js', 
+  './public/app-lib/angular-recaptcha.min.js', 
+  './public/app-lib/angular-socialshare.min.js', 
+  './public/app-lib/me-lazyload.min.js', 
+  './public/app-lib/angular-touch.min.js'],
   output: './public/dist/app_lib.js',
   callback: function(err, min) {
   	console.log("completed compressing library");
@@ -59,7 +73,8 @@ minify({
   compressor: cssnano,
   input: ['./public/app-content/css/jquery-ui.min.css',
     './public/app-content/css/bootstrap.min.css',
-    './public/app-content/css/font-awesome.min.css'],
+    './public/app-content/css/font-awesome.min.css'
+  ],
   output: './public/dist/app_lib.css',
   callback: function(err, min) {
     console.log("completed compressing css libraries");
