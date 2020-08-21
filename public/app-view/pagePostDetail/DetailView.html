@@ -166,6 +166,17 @@ socialshare-url="{{currentPath}}">
     <a ng-if="!showVideo && !showMap && mainImage && mainImage.secure_url" href="{{currentPost.data.page.url}}/media/photo/{{mainImage._id}}" style="padding: 0;" target="_blank">
       <img src="{{mainImage.secure_url}}" onError="this.src='https://www.healthyfling.com/processed/default-52adc3dc03639885e8aa93763e29868269dd3b9dad4689f140c0175b4f945922.png';" alt=""/>
     </a>
+    <div ng-if="!showVideo && !showMap && mainImage && mainImage.secure_url" class="likeDislike" style="
+    margin-top: -86px;
+    position: sticky;
+    left: 90%;
+    color: #fff;
+    background: white;
+    font-size: 30px;">
+      <div class="likeDislike" style="margin-left: 5px;" ng-click="likePost(mainImage._id);"><img src="/app-content/images/like.png"> Like | {{mainImage.like}}</div>
+      <div class="likeDislike" ng-click="dislikePost(mainImage._id);"><img src="/app-content/images/dislike.png"> | {{mainImage.dislike}}</div>
+    </div>
+
     <p style="overflow-wrap: break-word;" ng-if="!showVideo && !showMap && mainImage && mainImage.signature"><strong>{{mainImage.signature}}</strong></p>
     <div ng-if="showVideo && !iframe && !showMap">
       <iframe width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

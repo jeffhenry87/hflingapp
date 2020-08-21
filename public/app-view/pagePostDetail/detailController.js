@@ -54,6 +54,37 @@ app.controller('PagePostDetailController', ['$rootScope','$scope','$location','H
       }
     }
 
+
+    $scope.likePost = function(photoId) {
+        if (!$rootScope.user) {
+            return alert("You need to be logged in!");
+        }
+      // Check in the localStorage if this post is already liked
+      if (!window.localStorage.getItem(photoId)) {
+        // Increment post like by one and save it in the localstorage to avoid additional like
+        window.localStorage.setItem(photoId, true);
+        HttpService.LikePostPhoto(photoId)
+        .then(function(response) {
+          $scope.mainImage.like = $scope.mainImage.like + 1;
+        });
+      }
+    }
+
+    $scope.dislikePost = function(photoId) {
+        if (!$rootScope.user) {
+            return alert("You need to be logged in!");
+        }
+      // Check in the localStorage if this post is already disliked
+      if (!window.localStorage.getItem(photoId)) {
+        // Increment post like by one and save it in the localstorage to avoid additional like
+        window.localStorage.setItem(photoId, true);
+        HttpService.DislikePostPhoto(photoId)
+        .then(function(response) {
+          $scope.mainImage.dislike = $scope.mainImage.dislike + 1;
+        });
+      }
+    }
+
     $scope.likeComment = function(commentId, reply) {
         if (!$rootScope.user) {
             return alert("You need to be logged in!");
