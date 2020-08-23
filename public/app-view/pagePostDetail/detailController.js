@@ -85,6 +85,12 @@ app.controller('PagePostDetailController', ['$rootScope','$scope','$location','H
       }
     }
 
+    $scope.checkIfLiked = function(photoId) {
+        if(!window.localStorage.getItem(photoId)) {
+            return "0.5";
+        }
+    }
+
     $scope.likeComment = function(commentId, reply) {
         if (!$rootScope.user) {
             return alert("You need to be logged in!");

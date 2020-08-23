@@ -173,8 +173,8 @@ socialshare-url="{{currentPath}}">
     color: #fff;
     background: white;
     font-size: 30px;">
-      <div class="likeDislike" style="margin-left: 5px;" ng-click="likePost(mainImage._id);"><img src="/app-content/images/like.png"> Like | {{mainImage.like}}</div>
-      <div class="likeDislike" ng-click="dislikePost(mainImage._id);"><img src="/app-content/images/dislike.png"> | {{mainImage.dislike}}</div>
+      <div class="likeDislike" style="/*margin-left: 5px;*/ border: transparent" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="likePost(mainImage._id);"><img src="/app-content/images/like.png"> | {{mainImage.like}}</div>
+      <div class="likeDislike" style="border: transparent" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="dislikePost(mainImage._id);"><img src="/app-content/images/dislike.png"> | {{mainImage.dislike}}</div>
     </div>
 
     <p style="overflow-wrap: break-word;" ng-if="!showVideo && !showMap && mainImage && mainImage.signature"><strong>{{mainImage.signature}}</strong></p>
