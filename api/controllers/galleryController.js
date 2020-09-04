@@ -11,14 +11,20 @@ var tempcloudinary = require('cloudinary');
 var url  = require('url');
 var local_file_path = "";
 
+var uuid = require('uuid');
+var mime = require('mime-types');
+var { Storage } = require('@google-cloud/storage');
+
+
 var multer = require('multer');
+const { createPublicKey } = require('crypto');
 //var files_location = "/home/soft/hflingapp/public/files";
 var files_location = __dirname + '/../../public/files';
 
 if (!fs.existsSync(files_location)) {
 	fs.mkdirSync(files_location);
 }
-var Storage = multer.diskStorage({
+var ownStorage = multer.diskStorage({
 	destination: function(req, file, callback) {
 		callback(null, files_location);
 	},
@@ -30,7 +36,7 @@ var Storage = multer.diskStorage({
 });
 
 var upload = multer({
-	storage: Storage
+	storage: ownStorage
 }).array("imgUploader", 3); //Field name and max count
 
 exports.upload_images_to_local = function(req, res) {
@@ -141,5 +147,76 @@ exports.download_from_url_and_process = function(item, postId, callback) {
 			return false;
 		});
 	});
+};
+
+// exports.videoUpload = async function(req, res) {
+// 	// var readFile = fs.createReadStream(req);
+// 	// fs.writeFile('./temp.mp4', req.body.file, (err, res) => {
+// 	// 	if(!err)
+// 	// 		console.log('Done');
+// 	// });
+
+// 	// var uploadHandler = multer({
+// 	// 	storage: multerGoogleStorage.storageEngine()
+// 	// });
+
+// 	// uploadHandler.any();
+
+// 	// gcpHelper.createBucket(function() {
+// 	// 	res.json('200');
+// 	// });
+
+// 	var keyFile = require(process.env.GCS_KEYFILE);
+// 	console.log('env = ', process.env.GCS_KEYFILE, ' == ', keyFile);
+// 	// console.log(JSON.parse(req.files));
+// 	// res.json(req.files);
+// 	// console.log('inside videoUpload = ', req);
+// 	// res.json('200');
+// 	// return;
+// }
+
+exports.videoUpload = async (req, res) => {
+	// console.log(req.files);
+	const projectId = "healthyfling-202803";
+	const bucketName = "hf-media";
+	const originalName = req.files && req.files.length ? req.files[0].originalname : (req.file ? req.file.originalname : null);
+	let buffer = req.files && req.files.length ? req.files[0].buffer : (req.file ? req.file.buffer : null);
+
+	if(!buffer) {
+		res.status(400).json({data: 'Bad request'});
+		return;
+	}
+
+	const type = mime.lookup(originalName);
+
+	const storage = new Storage({
+		projectId: projectId,
+		keyFilename: './api/helper/key.json',
+	});
+
+	const bucket = storage.bucket(bucketName);
+	const blob = bucket.file(`${uuid.v4()}.mp4`);
+
+	const stream = blob.createWriteStream({
+		resumable: true,
+		contentType: type,
+		predefinedAcl: 'publicRead',
+	});
+
+	stream.on('error', err => {
+		res.status(500).json({data: err});
+		return;
+	});
+
+	stream.on('finish', () => {
+		res.status(200).json({
+			data: {
+				url: `https://storage.googleapis.com/${bucket.name}/${blob.name}`,
+			}
+		});
+		return;
+	});
+
+	stream.end(buffer);
 };
 

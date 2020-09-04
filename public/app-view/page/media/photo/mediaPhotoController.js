@@ -162,8 +162,10 @@ app.controller('MediaPhotoController', ['$rootScope','$scope','$location','HttpS
         }else{
           $scope.showVideo = true;
           $scope.showMap = false;
-          if ($scope.embed.indexOf('<iframe') > -1) {
-              $scope.iframe = true;
+            if($scope.embed.indexOf('storage.googleapis.com') > -1) {
+				$scope.iframe = false;
+            } else if ($scope.embed.indexOf('<iframe') > -1) {
+              $scope.iframe = false;
           } else {
             $scope.iframe = false;
             if ($scope.embed.indexOf('youtube.com') > -1) {

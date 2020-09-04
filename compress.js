@@ -21,7 +21,9 @@ minify({
   './public/app-lib/angular-recaptcha.min.js', 
   './public/app-lib/angular-socialshare.min.js', 
   './public/app-lib/me-lazyload.min.js', 
-  './public/app-lib/angular-touch.min.js'],
+  './public/app-lib/angular-touch.min.js', 
+  './public/app-lib/ng-file-upload.min.js', 
+  './public/app-lib/ng-file-upload-shim.min.js'],
   output: './public/dist/app_lib.js',
   callback: function(err, min) {
   	console.log("completed compressing library");

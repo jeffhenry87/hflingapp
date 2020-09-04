@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -5,6 +6,7 @@ const path = require('path');
 const User   = require('./api/models/user');
 const Post   = require('./api/models/post');
 const Page   = require('./api/models/page');
+
 const waw = {
 	express: express,
 	app: app,
@@ -31,6 +33,7 @@ mongoose.connect(waw.config.database, {
 	useNewUrlParser: true,
 	useCreateIndex: true
 });
+
 mongoose.Promise = global.Promise;
 const apiRoutes = express.Router();
 waw.router = apiRoutes;

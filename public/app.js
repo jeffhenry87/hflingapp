@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'angularMoment', 'vcRecaptcha', '720kb.socialshare', 'me-lazyload', 'ngTouch' ]);
+var app = angular.module('app', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'angularMoment', 'vcRecaptcha', '720kb.socialshare', 'me-lazyload', 'ngTouch', 'ngFileUpload' ]);
 
 var env = {};
 

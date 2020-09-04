@@ -313,7 +313,9 @@ app.controller('PagePostDetailController', ['$rootScope','$scope','$location','H
         }else{
           $scope.showVideo = true;
           $scope.showMap = false;
-          if ($scope.embed.indexOf('<iframe') > -1) {
+          if($scope.embed.indexOf('storage.googleapis.com') > -1) {
+            $scope.iframe = false;
+        } else if ($scope.embed.indexOf('<iframe') > -1) {
               $scope.iframe = true;
           } else {
             $scope.iframe = false;
@@ -623,7 +625,9 @@ app.controller('PagePostDetailController', ['$rootScope','$scope','$location','H
                 if (!$scope.files.length && $scope.embed && (!$scope.zip || !$scope.city)) {
                   $scope.showVideo = true;
                   $scope.showMap = false;
-                  if ($scope.embed.indexOf('<iframe') > -1) {
+                  if($scope.embed.indexOf('storage.googleapis.com') > -1) {
+                    $scope.iframe = false;
+                } else if ($scope.embed.indexOf('<iframe') > -1) {
                       $scope.iframe = true;
                   } else {
                     $scope.iframe = false;

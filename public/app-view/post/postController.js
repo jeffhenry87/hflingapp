@@ -9,7 +9,8 @@ app.controller("PostController", [
   'MetaService',
   '$timeout',
   '$route',
-  function($rootScope, $scope, $location, HttpService, $window, $modal, FlashService, MetaService, $timeout, $route) {
+  'Upload', 
+  function($rootScope, $scope, $location, HttpService, $window, $modal, FlashService, MetaService, $timeout, $route, Upload) {
     var vm = this;
 
     $scope.params = $location.search();
@@ -57,6 +58,9 @@ app.controller("PostController", [
     $scope.anonymouscomment = ["enabled", "disabled"];
     $scope.notified = ["yes", "no"];
     $scope.postermode = ["Personals", "Pages"];
+
+    $scope.videoFile = null;
+    $scope.errorFile = null;
 
     var range = ["Age"];
     for (var i = 0; i < 201; i++) {
@@ -805,6 +809,30 @@ app.controller("PostController", [
          // templateUrl: 'app-view/subscribe/SubscribePageView.html'
      });
    }
+
+   $scope.uploadVideo = function(file) {
+    $rootScope.loading = true;
+    file.upload = Upload.upload({
+      url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
+      data: {username: $scope.pageId, file: file} ,
+    });
+
+    file.upload.then(function (response) {
+      vm.data.embed = response.data.data.url;
+        $rootScope.loading = false;
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+        $rootScope.loading = false;
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+    //   console.log(evt);
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+  }
 
   }
 ]);

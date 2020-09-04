@@ -264,8 +264,9 @@ app.controller('MediaVideoController', ['$rootScope','$scope','$location','HttpS
                 $scope.share = $rootScope.currentPost.data.share || 'disabled';
 
                 $rootScope.loading = false;
-
-                if ($scope.embed.indexOf('<iframe') > -1) {
+                if($scope.embed.indexOf('storage.googleapis.com') > -1) {
+                    $scope.iframe = false;
+                } else if ($scope.embed.indexOf('<iframe') > -1) {
                     $scope.iframe = true;
                 } else {
                   $scope.iframe = false;

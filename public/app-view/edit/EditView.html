@@ -340,6 +340,31 @@
                 <input type="text" placeholder='Insert description for this video (Optional)' class="embeded_area" ng-model="embedDescription">
               </div>
 
+              <div class="emmbed_video">
+                    <legend>Upload Video</legend>
+                    
+                    <input style="padding: 0;" type="file" ngf-select ng-model="videoFile" name="file"    
+                           accept="video/*" ngf-max-size="200MB" required
+                           ngf-model-invalid="errorFile">
+                    
+                    <i ng-show="errorFile">File too large 
+                        {{errorFile.size / 1000000|number:1}}MB. max file size allowed is 200MB</i>
+                        <br>
+                    <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
+                    
+                    <button class="btn btn-danger" ng-click="videoFile = null" ng-show="videoFile">Remove</button>
+                    <button class="btn btn-primary" ng-disabled="!videoFile" ng-click="uploadVideo(videoFile)">Submit</button>
+
+                    <span class="progress" ng-show="videoFile.progress >= 0">
+                      <div style="width:{{videoFile.progress}}%" 
+                          ng-bind="videoFile.progress + '%'"></div>
+                    </span>
+                    <span ng-show="videoFile.result">Upload Successful</span>
+                    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                  
+
+              </div>
+
               <div class="bio_area bio_full">
                   <p>By posting on Healthyfling.com you agree to the <a href="terms">terms and conditions</a>, <a href="policy">privacy policy</a> and <a href="disclaimer">Disclaimer</a> of this site.</p>
               </div>

@@ -369,8 +369,9 @@ app.controller('PageController', ['$rootScope','$scope','$location' ,'HttpServic
 
         var embed = (currentPost.embed ? currentPost.embed.replace("xxx=", "src=").replace("yyyy=", "href=") : '');
         $scope.embedDescription = currentPost.embedDescription || '';
-
-        if (embed.indexOf('<iframe') > -1) {
+        if(embed.indexOf('storage.googleapis.com') > -1) {
+            $scope.iframe = false;
+        } else if (embed.indexOf('<iframe') > -1) {
             $scope.iframe = true;
         } else {
           $scope.iframe = false;

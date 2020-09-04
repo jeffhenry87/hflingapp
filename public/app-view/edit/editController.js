@@ -1,4 +1,4 @@
-app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpService', '$http', '$window', 'MetaService', function( $rootScope,$scope,$location,HttpService,$http,$window, MetaService ){
+app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpService', '$http', '$window', 'MetaService', 'Upload', function( $rootScope,$scope,$location,HttpService,$http,$window, MetaService, Upload ){
     var vm = this;
 
     $rootScope.metaservice = MetaService;
@@ -7,6 +7,8 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
     $scope.countries = $rootScope.countryList;
     $scope.states = $rootScope.stateList;
     $scope.regions = $rootScope.regionList;
+    $scope.videoFile = null;
+    $scope.errorFile = null;
 
     $scope.newstates = ["State"];
     $scope.newregions = [];
@@ -643,5 +645,29 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
 
         });
     };
+
+    $scope.uploadVideo = function(file) {
+        $rootScope.loading = true;
+        file.upload = Upload.upload({
+          url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
+          data: {username: $scope.pageId, file: file} ,
+        });
+    
+        file.upload.then(function (response) {
+            $scope.embed = response.data.data.url;
+            $rootScope.loading = false;
+          $timeout(function () {
+            file.result = response.data;
+          });
+        }, function (response) {
+            $rootScope.loading = false;
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        }, function (evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+        //   console.log(evt);
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+    }
 
 }]);
