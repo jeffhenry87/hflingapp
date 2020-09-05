@@ -811,20 +811,20 @@ app.controller("PostController", [
    }
 
    $scope.uploadVideo = function(file) {
-    $rootScope.loading = true;
+     $scope.disableBtn = true;
     file.upload = Upload.upload({
-      url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
+      url: 'http://localhost:8000/api/videoUpload', //'https://www.healthyfling.com/api/videoUpload', 
       data: {username: $scope.pageId, file: file} ,
     });
 
     file.upload.then(function (response) {
       vm.data.embed = response.data.data.url;
-        $rootScope.loading = false;
+      $scope.disableBtn = false;
       $timeout(function () {
         file.result = response.data;
       });
     }, function (response) {
-        $rootScope.loading = false;
+      $scope.disableBtn = false;
       if (response.status > 0)
         $scope.errorMsg = response.status + ': ' + response.data;
     }, function (evt) {

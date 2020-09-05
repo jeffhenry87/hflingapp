@@ -292,29 +292,6 @@
             <p style="margin-top: 10px; margin-left: 1px;">Try adding some screenshots just in case the embed video expires or gets deleted!</p>
         </div>
 
-        <div class="emmbed_video">
-            <legend>Upload Video</legend>
-            
-            <input style="padding: 0;" type="file" ngf-select ng-model="videoFile" name="file"    
-                   accept="video/*" ngf-max-size="200MB" required
-                   ngf-model-invalid="errorFile">
-            
-            <i ng-show="errorFile">File too large 
-                {{errorFile.size / 1000000|number:1}}MB. max file size allowed is 200MB</i>
-                <br>
-            <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
-            
-            <button class="btn btn-danger" ng-click="videoFile = null" ng-show="videoFile">Remove</button>
-            <button class="btn btn-primary" ng-disabled="!videoFile" ng-click="uploadVideo(videoFile)">Submit</button>
-
-            <span class="progress" ng-show="videoFile.progress >= 0">
-              <div style="width:{{videoFile.progress}}%" 
-                  ng-bind="videoFile.progress + '%'"></div>
-            </span>
-            <span ng-show="videoFile.result">Upload Successful</span>
-            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-      </div>
-
         <div class="bio_area bio_full">
             <p>By posting on Healthyfling.com you agree to the <a href="terms">terms and conditions</a>, <a href="policy">privacy policy</a> and <a href="disclaimer">Disclaimer</a> of this site.</p>
         </div>
@@ -517,28 +494,37 @@
                             <p style="margin-top: 10px; margin-left: 1px;">Try adding some screenshots just in case the embed video expires or gets deleted!</p>
                         </div>
 
-              <div class="emmbed_video">
-                <legend>Upload Video</legend>
-                
-                <input style="padding: 0;" type="file" ngf-select ng-model="videoFile" name="file"    
-                       accept="video/*" ngf-max-size="200MB" required
-                       ngf-model-invalid="errorFile">
-                
-                <i ng-show="errorFile">File too large 
-                    {{errorFile.size / 1000000|number:1}}MB. max file size allowed is 200MB</i>
-                    <br>
-                <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
-                
-                <button class="btn btn-danger" ng-click="videoFile = null" ng-show="videoFile">Remove</button>
-                <button class="btn btn-primary" ng-disabled="!videoFile" ng-click="uploadVideo(videoFile)">Submit</button>
+                        <div class="emmbed_video">
+                            <legend>Upload Video</legend>
+                            <input style="padding: 0;" type="file" ngf-select ng-model="videoFile" name="file"    
+                                accept="video/mp4" ngf-max-size="200MB" required
+                                ngf-model-invalid="errorFile">
+                            <div style="
+                            margin: 5px 0 0 0;
+                            padding: 3px;
+                            border: 1px solid;
+                            width: fit-content;
+                            border-radius: 5px;">
+                                <p>*Video size upto 200MB</p>
+                                <p>*.mp4 format supported</p>
+                            </div>
+                            <br>
+                            
+                            <i style="color: tomato;" ng-show="errorFile">File too large {{errorFile.size / 1000000|number:1}}MB. max file size allowed is 200MB</i>
+                            <br>
+                            <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
+                            
+                            <button class="btn btn-danger" ng-click="videoFile = null" ng-disabled="disableBtn" ng-show="videoFile">Remove</button>
+                            <button class="btn btn-primary" ng-disabled="!videoFile || disableBtn" ng-click="uploadVideo(videoFile)">Submit</button>
 
-                <span class="progress" ng-show="videoFile.progress >= 0">
-                  <div style="width:{{videoFile.progress}}%" 
-                      ng-bind="videoFile.progress + '%'"></div>
-                </span>
-                <span ng-show="videoFile.result">Upload Successful</span>
-                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-          </div>
+                            <span class="progress" ng-show="videoFile.progress >= 0">
+                                <i ng-if="disableBtn" class="fa fa-spinner"></i>
+                            <div style="width:{{videoFile.progress}}%" 
+                                ng-bind="videoFile.progress + '%'"></div>
+                            </span>
+                            <span ng-show="videoFile.result">Upload Successful</span>
+                            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                        </div>
 
                         <div class="bio_area bio_full">
                             <p>By posting on Healthyfling.com you agree to the <a href="terms">terms and conditions</a>, <a href="policy">privacy policy</a> and <a href="disclaimer">Disclaimer</a> of this site.</p>
@@ -549,7 +535,7 @@
 
                         <div class="bio_area confirm_edit">
                             <div class="post_bk">
-                                <input type="submit" value="Post!" ng-click = "vm.addPostAndPage()" style="padding-left: 30px;padding-right: 30px;">
+                                <input type="submit" ng-disabled="disableBtn" value="Post!" ng-click = "vm.addPostAndPage()" style="padding-left: 30px; padding-right: 30px;">
                             </div>
                         </div>
 
