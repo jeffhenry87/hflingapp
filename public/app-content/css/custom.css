@@ -2593,3 +2593,13 @@ top:20px;
 #mediaCarouselId li {
     margin-bottom: 0; 
 }
+
+div.likePic:hover {
+    font-size: 1.5em;
+    background-color: transparent;
+}
+
+div.dislikePic:hover {
+    font-size: 1.5em;
+    background-color: transparent;
+}

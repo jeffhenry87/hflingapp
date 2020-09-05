@@ -167,14 +167,18 @@ socialshare-url="{{currentPath}}">
       <img src="{{mainImage.secure_url}}" onError="this.src='https://www.healthyfling.com/processed/default-52adc3dc03639885e8aa93763e29868269dd3b9dad4689f140c0175b4f945922.png';" alt=""/>
     </a>
     <div ng-if="!showVideo && !showMap && mainImage && mainImage.secure_url" class="likeDislike" style="
-    margin-top: -86px;
+    margin-top: -73px;
     position: sticky;
     left: 90%;
     color: #fff;
     background: white;
-    font-size: 30px;">
-      <div class="likeDislike" style="/*margin-left: 5px;*/ border: transparent" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="likePost(mainImage._id);"><img src="/app-content/images/like.png"> | {{mainImage.like}}</div>
-      <div class="likeDislike" style="border: transparent" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="dislikePost(mainImage._id);"><img src="/app-content/images/dislike.png"> | {{mainImage.dislike}}</div>
+    /* font-size: 30px; */
+    background-color: rgba(0,0,0,.4);
+    border-radius: 3px;
+    margin-right: 0;
+    border: none;">
+      <div class="likeDislike likePic" style="border: transparent; color: white; margin-bottom: 0px;" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="likePost(mainImage._id);"><i class="fa fa-thumbs-up"></i> <span style="color: white;">| {{mainImage.like}}</span></div>
+      <div class="likeDislike dislikePic" style="border: transparent; color: white; margin-bottom: 0px;" ng-style="{'opacity': checkIfLiked(mainImage._id)}" ng-click="dislikePost(mainImage._id);"><i class="fa fa-thumbs-down"></i> <span style="color: white;">| {{mainImage.dislike}}</span></div>
     </div>
 
     <p style="overflow-wrap: break-word;" ng-if="!showVideo && !showMap && mainImage && mainImage.signature"><strong>{{mainImage.signature}}</strong></p>
