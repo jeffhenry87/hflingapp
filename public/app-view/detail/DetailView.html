@@ -175,7 +175,7 @@
                 <img ng-if = "mainImage.indexOf('iframe') == -1" src="{{mainImage}}" onError="this.src='https://www.healthyfling.com/processed/default-52adc3dc03639885e8aa93763e29868269dd3b9dad4689f140c0175b4f945922.png';" alt=""/>
               </a>
               <div ng-if="showVideo && !iframe && !showMap">
-                <iframe width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
               <div ng-if="showVideo && iframe && !showMap" ng-bind-html="embed | unsafe">
               </div>

@@ -183,7 +183,7 @@ socialshare-url="{{currentPath}}">
 
     <p style="overflow-wrap: break-word;" ng-if="!showVideo && !showMap && mainImage && mainImage.signature"><strong>{{mainImage.signature}}</strong></p>
     <div ng-if="showVideo && !iframe && !showMap">
-      <iframe width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <p style="overflow-wrap: break-word;"><strong>{{embedDescription}}</strong></p>
     </div>
     <div ng-if="showVideo && iframe && !showMap" ng-bind-html="embed | unsafe">
