@@ -158,7 +158,7 @@ socialshare-url="{{currentPath}}">
 
 <div class="gallery_slider clearfix" ng-if = "files.length > 0 || embed != '' || city || zip" style="padding-bottom:15px;">
   <div class="galery_full" style="margin-right: 20px;">
-      <iframe ng-if="!iframe" width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe ng-if="!iframe" width="560" height="315" src="{{embed}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <div ng-if="iframe" ng-bind-html="embed | unsafe"></div>
   </div>
   <h4>{{embedDescription}}</h4>
