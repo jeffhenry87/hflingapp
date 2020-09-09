@@ -399,6 +399,9 @@ app.controller("AdspagesController",['$scope','$rootScope','$location','HttpServ
         if(embed.indexOf('storage.googleapis.com') > -1) {
             $scope.iframe = false;
         } else if (embed.indexOf('<iframe') > -1) {
+            let embedArr = currentPost.embed.split('xxx="');
+            embedArr = embedArr[1].split('"');
+            embed = embedArr[0];
             $scope.iframe = true;
         } else {
           $scope.iframe = false;
