@@ -222,7 +222,7 @@
                   <carousel>
                     <slide ng-repeat="slide in data.files">
                       <a ng-if="!slide.video" href="{{pageData['url']}}/media/photo/{{slide._id}}">
-                        <img ng-src="{{slide.secure_url}}">
+                        <img style="object-fit: cover;" ng-src="{{slide.secure_url}}">
                       </a>
                       <a style="width: 100%" ng-if="slide.video" href="{{pageData['url']}}/media/video/{{slide.postId}}">
                         <img src="/app-content/images/video-placeholder.png">

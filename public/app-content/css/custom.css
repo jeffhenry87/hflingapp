@@ -2473,8 +2473,8 @@ input[type=file].wd_97{
     }
     
     .columnNew img {
-        width: 203px !important;
-        height: 203px !important;
+        width: 227px !important;
+        height: 227px !important;
     }
   }
 
@@ -2534,12 +2534,12 @@ input[type=file].wd_97{
 
   @media screen and (min-width: 325px) and (max-width: 419px)  {
     #mediaCarouselId {
-        margin: 0 13px 9px 0 !important;
+        margin: 0 4px 4px 0 !important;
     }
     
     .columnNew img {
-        width: 75px !important;
-        height: 75px !important;
+        width: 106px !important;
+        height: 106px !important;
     }
     
     #mediaCarouselId li {
@@ -2569,7 +2569,7 @@ input[type=file].wd_97{
   }
 
 .row1New {
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
 }
