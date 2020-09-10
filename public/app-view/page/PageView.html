@@ -248,8 +248,8 @@
 
                     <div class="gallery_slider clearfix" ng-if="!item.files.length && item.embed" style="padding-bottom:15px;">
                       <div class="galery_full" style="margin: 12px 0 0 5px">
-                          <iframe ng-if="!iframe" width="560" height="315" src="{{getEmbedData(item)}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                          <div ng-if="iframe" ng-bind-html="{{getEmbedData(item)}} | unsafe"></div>
+                          <iframe ng-if="true" width="560" height="315" src="{{getEmbedData(item)}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          <!-- <div ng-if="false" ng-bind-html="{{getEmbedData(item)}} | unsafe"></div> -->
                       </div>
                     </div>
 
