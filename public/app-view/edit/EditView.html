@@ -336,7 +336,7 @@
 
               <div class="emmbed_video" style="background: #cdcbf5;clear: both;">
                 <h3>Insert Video Link or Embed Code</h3>
-                <input type="text" placeholder='Insert YouTube link ONLY or Embed a video from any site!' class="embeded_area" ng-model="embed">
+                <input type="text" placeholder='Insert YouTube link ONLY or Embed a video from any site!' class="embeded_area" ng-change="markEmbed(embed)" ng-model="embed">
                 <input type="text" placeholder='Insert description for this video (Optional)' class="embeded_area" ng-model="embedDescription">
               </div>
 
@@ -352,12 +352,13 @@
                         <br>
                     <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
                     
-                    <button class="btn btn-danger" ng-click="videoFile = null" ng-show="videoFile">Remove</button>
-                    <button class="btn btn-primary" ng-disabled="!videoFile" ng-click="uploadVideo(videoFile)">Submit</button>
+                    <button class="btn btn-danger" ng-click="videoFile = null" ng-disabled="disableBtn" ng-show="videoFile">Remove</button>
+                    <button class="btn btn-primary" ng-disabled="!videoFile || disableBtn" ng-click="uploadVideo(videoFile)">Submit</button>
 
                     <span class="progress" ng-show="videoFile.progress >= 0">
-                      <div style="width:{{videoFile.progress}}%" 
-                          ng-bind="videoFile.progress + '%'"></div>
+                        <i ng-if="disableBtn" class="fa fa-spinner"></i>
+                    <div style="width:{{videoFile.progress}}%" 
+                        ng-bind="videoFile.progress + '%'"></div>
                     </span>
                     <span ng-show="videoFile.result">Upload Successful</span>
                     <span class="err" ng-show="errorMsg">{{errorMsg}}</span>

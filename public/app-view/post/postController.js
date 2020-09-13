@@ -23,6 +23,8 @@ app.controller("PostController", [
         $scope.imageUrl.push({});
     }
 
+    var embedTemp = '';
+
     window.onbeforeunload = function (e) {
       if($location.path().indexOf('/post') > -1 && ($location.path().slice(0, 6) === '/post' || $location.path().slice(0, 6) === '/post?')) {
         e = e || window.event;
@@ -745,7 +747,7 @@ app.controller("PostController", [
           notified: this.data.notified,
           share: this.data.share,
           sharedData: this.data.sharedData,
-          embed: this.data.embed
+          embed: embedTemp //to-do change it with "vm.data.embed" when multi video support is to be done
             .replace("src=", "xxx=")
             .replace("href=", "yyyy="),
           embedDescription: this.data.embedDescription,
@@ -811,6 +813,7 @@ app.controller("PostController", [
    }
 
    $scope.uploadVideo = function(file) {
+    $scope.errorMsg = '';
      $scope.disableBtn = true;
     file.upload = Upload.upload({
       url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
@@ -818,8 +821,12 @@ app.controller("PostController", [
     });
 
     file.upload.then(function (response) {
-      vm.data.embed = response.data.data.url;
       $scope.disableBtn = false;
+      if(!response.data) {
+        $scope.errorMsg = "Server error, please try after sometime";
+          return;
+      }
+      embedTemp = response.data.data.url;
       $timeout(function () {
         file.result = response.data;
       });
@@ -832,6 +839,11 @@ app.controller("PostController", [
     //   console.log(evt);
       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
     });
+  }
+
+  $scope.markEmbed = function(data) {
+    embedTemp = data;
+    return;
   }
 
   }

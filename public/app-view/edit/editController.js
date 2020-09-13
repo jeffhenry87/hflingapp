@@ -1,6 +1,8 @@
 app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpService', '$http', '$window', 'MetaService', 'Upload', function( $rootScope,$scope,$location,HttpService,$http,$window, MetaService, Upload ){
     var vm = this;
 
+    embedTemp = '';
+
     $rootScope.metaservice = MetaService;
     $rootScope.metaservice.set('Post an Ad');
 
@@ -487,7 +489,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
                 "message": $scope.message,
                 "anonymouscomment" : $scope.anonymouscomment,
                 "notified" : $rootScope.currentPost.data.notified,
-                "embed": ($scope.embed ? $scope.embed.replace("src=", "xxx=").replace("href=", "yyyy="): ''),
+                "embed": (embedTemp ? embedTemp.replace("src=", "xxx=").replace("href=", "yyyy="): ''),
                 "embedDescription": $scope.embedDescription,
                 "files": $rootScope.imageList,
                 "sharedData": $scope.sharedData
@@ -519,7 +521,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
       $location.path("/detail/"+id);
     };
 
-     $scope.initController = function () {
+    $scope.initController = function () {
 
 
 
@@ -573,7 +575,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
                 });
                 $scope.anonymouscomment = $rootScope.currentPost.data.anonymouscomment || "disabled";
                 $scope.share = $rootScope.currentPost.data.share || "disabled";
-                $scope.embed = ($rootScope.currentPost.data.embed ? $rootScope.currentPost.data.embed.replace("xxx=", "src=").replace("yyyy=", "href=") : '');
+                $scope.embed = ($rootScope.currentPost.data.embed ? ( $rootScope.currentPost.data.embed.indexOf("storage.googleapis.com") > -1 ? '' : $rootScope.currentPost.data.embed.replace("xxx=", "src=").replace("yyyy=", "href=")) : $rootScope.currentPost.data.embed.replace("xxx=", "src=").replace("yyyy=", "href="));
                 $scope.embedDescription = $rootScope.currentPost.data.embedDescription;
                 $rootScope.loading = false;
 
@@ -647,20 +649,25 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
     };
 
     $scope.uploadVideo = function(file) {
-        $rootScope.loading = true;
+        $scope.errorMsg = '';
+        $scope.disableBtn = true;
         file.upload = Upload.upload({
-          url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
+          url: 'http://localhost:8000/api/videoUpload',//'https://www.healthyfling.com/api/videoUpload', //
           data: {username: $scope.pageId, file: file} ,
         });
     
         file.upload.then(function (response) {
-            $scope.embed = response.data.data.url;
-            $rootScope.loading = false;
+            $scope.disableBtn = false;
+            if(!response.data) {
+                $scope.errorMsg = "Server error, please try after sometime";
+                return;
+            }
+            embedTemp = response.data.data.url; //$scope.embed
           $timeout(function () {
             file.result = response.data;
           });
         }, function (response) {
-            $rootScope.loading = false;
+            $scope.disableBtn = false;
           if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
         }, function (evt) {
@@ -668,6 +675,11 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         //   console.log(evt);
           file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
         });
+    }
+
+    $scope.markEmbed = function(data) {
+        embedTemp = data;
+        return;
     }
 
 }]);

@@ -15,6 +15,11 @@ var uuid = require('uuid');
 var mime = require('mime-types');
 var { Storage } = require('@google-cloud/storage');
 
+const projectId = "healthyfling-202803";
+const storage = new Storage({
+	projectId: projectId,
+	keyFilename: './api/helper/key.json',
+});
 
 var multer = require('multer');
 const { createPublicKey } = require('crypto');
@@ -177,7 +182,6 @@ exports.download_from_url_and_process = function(item, postId, callback) {
 
 exports.videoUpload = async (req, res) => {
 	// console.log(req.files);
-	const projectId = "healthyfling-202803";
 	const bucketName = "hf-media";
 	const originalName = req.files && req.files.length ? req.files[0].originalname : (req.file ? req.file.originalname : null);
 	let buffer = req.files && req.files.length ? req.files[0].buffer : (req.file ? req.file.buffer : null);
@@ -188,11 +192,6 @@ exports.videoUpload = async (req, res) => {
 	}
 
 	const type = mime.lookup(originalName);
-
-	const storage = new Storage({
-		projectId: projectId,
-		keyFilename: './api/helper/key.json',
-	});
 
 	const bucket = storage.bucket(bucketName);
 	const blob = bucket.file(`${uuid.v4()}.mp4`);
@@ -220,3 +219,19 @@ exports.videoUpload = async (req, res) => {
 	stream.end(buffer);
 };
 
+exports.getObjectListing = async function listFiles(req, res) {
+	const bucketName = "hf-media";
+	const result = [];
+	// Lists files in the bucket
+	const [files] = await storage.bucket(bucketName).getFiles();
+  
+	console.log('Files:');
+	files.forEach(file => {
+	  console.log(file.name);
+	  result.push(file.name);
+	});
+	res.status(200).json({
+		data: result
+	});
+	return;
+  }

@@ -489,7 +489,7 @@
 
                         <div class="emmbed_video" style="background: #cdcbf5;clear: both;">
                             <h3>Insert Video Link or Embed Code</h3>
-                            <input type="text" placeholder='Insert YouTube link ONLY or Embed a video from any site!' class="embeded_area" ng-model="vm.data.embed">
+                            <input type="text" placeholder='Insert YouTube link ONLY or Embed a video from any site!' class="embeded_area" ng-model="vm.data.embed" ng-change="markEmbed(vm.data.embed)">
                             <input type="text" placeholder='Insert description for this video (Optional)' class="embeded_area" ng-model="vm.data.embedDescription">
                             <p style="margin-top: 10px; margin-left: 1px;">Try adding some screenshots just in case the embed video expires or gets deleted!</p>
                         </div>
