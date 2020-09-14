@@ -154,32 +154,6 @@ exports.download_from_url_and_process = function(item, postId, callback) {
 	});
 };
 
-// exports.videoUpload = async function(req, res) {
-// 	// var readFile = fs.createReadStream(req);
-// 	// fs.writeFile('./temp.mp4', req.body.file, (err, res) => {
-// 	// 	if(!err)
-// 	// 		console.log('Done');
-// 	// });
-
-// 	// var uploadHandler = multer({
-// 	// 	storage: multerGoogleStorage.storageEngine()
-// 	// });
-
-// 	// uploadHandler.any();
-
-// 	// gcpHelper.createBucket(function() {
-// 	// 	res.json('200');
-// 	// });
-
-// 	var keyFile = require(process.env.GCS_KEYFILE);
-// 	console.log('env = ', process.env.GCS_KEYFILE, ' == ', keyFile);
-// 	// console.log(JSON.parse(req.files));
-// 	// res.json(req.files);
-// 	// console.log('inside videoUpload = ', req);
-// 	// res.json('200');
-// 	// return;
-// }
-
 exports.videoUpload = async (req, res) => {
 	// console.log(req.files);
 	const bucketName = "hf-media";

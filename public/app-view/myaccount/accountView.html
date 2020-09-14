@@ -153,6 +153,13 @@
 								<img ng-show="item.files[0].secure_url" style="width: 250px; float: left; margin-left: 5px;" src="{{item.files[0].secure_url}}" alt="" />
 								<div style="align-self: flex-end; margin-left: 5px;"><img ng-show="item.files[1].secure_url" style="width: 120px; height: 120px; filter: brightness(50%); -webkit-filter: brightness(50%);" src="{{item.files[1].secure_url}}" alt="" /><span style="margin-left: -76px; position: absolute; left: auto; margin-top: 41px; color: #fff; font-size: 30px;" ng-if="item.files.length - 1 > 0">+{{item.files.length - 1}}</span></div>
 							</a>
+
+							<div class="gallery_slider clearfix" ng-if="!item.files.length && item.embed" style="padding-bottom:15px;">
+								<div class="galery_full" style="margin: 12px 0 0 5px">
+									<iframe ng-if="true" width="560" height="315" src="{{getEmbedData(item)}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+									<!-- <div ng-if="false" ng-bind-html="{{getEmbedData(item)}} | unsafe"></div> -->
+								</div>
+							  </div>
 	
 							<div class="linkBlock" ng-show="!item.files[0].secure_url && item.sharedLink">
 								<a href="{{item.sharedData.url}}" target="_blank" class="mobileMaxWidth">
