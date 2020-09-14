@@ -11,6 +11,7 @@ module.exports = function(apiRoutes) {
   apiRoutes.post('/uploadimagestolocal', gallery.upload_images_to_local);
   apiRoutes.post('/videoUpload', multer().any(), gallery.videoUpload);
   apiRoutes.get('/listBucketObjects', gallery.getObjectListing);
+  apiRoutes.delete('/removeObject', gallery.removeObject);
 
   // app.route('/tasks/:taskId')
   //   .get(todoList.read_a_task)

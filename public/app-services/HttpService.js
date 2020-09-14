@@ -652,6 +652,21 @@ app.factory('HttpService', ['$http', '$modal', '$rootScope', '$location', functi
                     }
                 }).then(handleSuccess, handleError('Error getting sales report'));
     };
+    
+    service.deleteUploadedFile = function(data) {
+
+        var serializeData = JSON.stringify(data);
+        var url = "/api/removeObject";
+        var config = {
+            headers : {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Authorization': $rootScope.token
+            }
+        };
+         return $http.delete(url, serializeData, config).then(handleSuccess, handleError('Error getting data'));
+    
+    }
+
     // private functions
     function handleSuccess(data) {
         return data;

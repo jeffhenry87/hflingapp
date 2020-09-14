@@ -648,7 +648,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         });
     };
 
-    $scope.uploadVideo = function(file) {
+    $scope.uploadVideo = function(file, errFiles) {
         $scope.errorMsg = '';
         $scope.disableBtn = true;
         file.upload = Upload.upload({
@@ -681,5 +681,26 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         embedTemp = data;
         return;
     }
+    
+  $scope.deleteUploadedFile = function() {
+    var uploadedFileUrlArr = embedTemp.split('media/');
+    if(uploadedFileUrlArr[1].indexOf('.mp4') == -1) {
+      alert("File is not uploaded to cloud");
+      return;
+    }
+
+    var data = {fileName: uploadedFileUrlArr[1]};
+    $scope.disableBtn = true;
+    this.HttpService.deleteUploadedFile(data)
+    .then(function(response) {
+      $scope.disableBtn = false;
+      if (response.status == '200') {
+        videoFile = null;
+        embedTemp = '';
+      }
+      return;
+    });
+  }
+
 
 }]);

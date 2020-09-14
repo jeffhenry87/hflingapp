@@ -343,7 +343,7 @@
               <div class="emmbed_video">
                     <legend>Upload Video</legend>
                     
-                    <input style="padding: 0;" type="file" ngf-select ng-model="videoFile" name="file"    
+                    <input style="padding: 0;" type="file" ngf-select="uploadVideo($file, $invalidFile)" ng-model="videoFile" name="file"    
                            accept="video/*" ngf-max-size="200MB" required
                            ngf-model-invalid="errorFile">
                     
@@ -352,8 +352,8 @@
                         <br>
                     <!-- <img ng-show="myForm.file.$valid" ngf-thumbnail="videoFile" class="thumb">  -->
                     
-                    <button class="btn btn-danger" ng-click="videoFile = null" ng-disabled="disableBtn" ng-show="videoFile">Remove</button>
-                    <button class="btn btn-primary" ng-disabled="!videoFile || disableBtn" ng-click="uploadVideo(videoFile)">Submit</button>
+                    <button class="btn btn-danger" ng-click="deleteUploadedFile()" ng-disabled="disableBtn" ng-show="videoFile">Remove</button>
+                    <!-- <button class="btn btn-primary" ng-disabled="!videoFile || disableBtn" ng-click="uploadVideo(videoFile)">Submit</button> -->
 
                     <span class="progress" ng-show="videoFile.progress >= 0">
                         <i ng-if="disableBtn" class="fa fa-spinner"></i>
@@ -381,7 +381,6 @@
                       <input type="submit" value="Cancel!" ng-click="vm.detail(id)">
                   </div>
               </div>
-
           </div>
     </div>
 </section>

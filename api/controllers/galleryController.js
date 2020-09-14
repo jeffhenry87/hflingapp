@@ -193,7 +193,7 @@ exports.videoUpload = async (req, res) => {
 	stream.end(buffer);
 };
 
-exports.getObjectListing = async function listFiles(req, res) {
+exports.getObjectListing = async function(req, res) {
 	const bucketName = "hf-media";
 	const result = [];
 	// Lists files in the bucket
@@ -207,5 +207,24 @@ exports.getObjectListing = async function listFiles(req, res) {
 	res.status(200).json({
 		data: result
 	});
+	return;
+  }
+
+  exports.removeObject = async function(req, res) {
+	const bucketName = "hf-media";
+	const filename = req.body.fileName;
+	// delete files in the bucket
+	try {
+		await storage.bucket(bucketName).file(filename).delete();
+	
+		res.status(200).json({
+			data: 'file delete from cloud'
+		});
+	} catch(e) {
+		res.status(400).json({
+			data: "file could not be delted",
+			message: e
+		});
+	}
 	return;
   }
