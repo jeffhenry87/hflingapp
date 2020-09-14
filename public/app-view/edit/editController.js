@@ -652,7 +652,7 @@ app.controller('EditController', ['$rootScope','$scope','$location' ,'HttpServic
         $scope.errorMsg = '';
         $scope.disableBtn = true;
         file.upload = Upload.upload({
-          url: 'http://localhost:8000/api/videoUpload',//'https://www.healthyfling.com/api/videoUpload', //
+          url: 'https://www.healthyfling.com/api/videoUpload', //'http://localhost:8000/api/videoUpload',
           data: {username: $scope.pageId, file: file} ,
         });
     
