@@ -393,7 +393,6 @@ app.controller("AdspagesController",['$scope','$rootScope','$location','HttpServ
     // }
 
     $scope.getEmbedData = function(currentPost) {
-
         var embed = (currentPost.embed ? currentPost.embed.replace("xxx=", "src=").replace("yyyy=", "href=") : '');
         $scope.embedDescription = currentPost.embedDescription || '';
         if(embed.indexOf('storage.googleapis.com') > -1) {
@@ -412,6 +411,17 @@ app.controller("AdspagesController",['$scope','$rootScope','$location','HttpServ
         return embed;
     }
 
-  }
+//     $scope.isIframeAllowed = function(currentPost) {
+        
+//         if(currentPost.embed.indexOf('storage.googleapis.com') > -1) {
+//             return false;
+//         }else if (currentPost.embed.indexOf('youtube.com') > -1) {
+//             return false;
+//         } else if (currentPost.embed.indexOf('<iframe') > -1) {
+//             return false;
+//         } 
+//     }
+
+//   }
 
 }]);

@@ -1667,6 +1667,7 @@ exports.read_my_personal_posts = function(req, res) {
 exports.read_my_personal_pages = function(req, res) {
     var query_params = url.parse(req.url,true).query;
     query_params.page = {$exists : true};
+    query_params.status = 'active';
 
     query_params["email"] = req.body.email;
     
