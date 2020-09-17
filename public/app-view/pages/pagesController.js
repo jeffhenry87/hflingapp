@@ -422,6 +422,6 @@ app.controller("AdspagesController",['$scope','$rootScope','$location','HttpServ
 //         } 
 //     }
 
-//   }
+  }
 
 }]);
