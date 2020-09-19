@@ -330,7 +330,7 @@ app.filter('roundup', function() {
 });
 
 
-app.controller("AdspagesController",['$scope','$rootScope','$location','HttpService','$window', function ($scope,$rootScope,$location,HttpService,$window) {
+app.controller("AdspagesController",['$scope','$rootScope','$location','HttpService','$window', '$timeout', function ($scope,$rootScope,$location,HttpService,$window, $timeout) {
 
   var vm = {};
 
@@ -396,32 +396,51 @@ app.controller("AdspagesController",['$scope','$rootScope','$location','HttpServ
         var embed = (currentPost.embed ? currentPost.embed.replace("xxx=", "src=").replace("yyyy=", "href=") : '');
         $scope.embedDescription = currentPost.embedDescription || '';
         if(embed.indexOf('storage.googleapis.com') > -1) {
-            $scope.iframe = false;
+            currentPost.showIframe = false;
         } else if (embed.indexOf('<iframe') > -1) {
             var embedArr = currentPost.embed.split('xxx="');
             embedArr = embedArr[1].split('"');
             embed = embedArr[0];
-            $scope.iframe = true;
+            currentPost.showIframe = true;
         } else {
-          $scope.iframe = false;
+          currentPost.showIframe = true;
           if (embed.indexOf('youtube.com') > -1) {
             embed = 'https://www.youtube.com/embed/' + embed.slice(embed.indexOf('v=')+2, embed.length);
           }
         }
-        return embed;
+        currentPost.videoUrl = embed;
+        return ;
     }
 
-//     $scope.isIframeAllowed = function(currentPost) {
+    // $scope.isIframeAllowed = function(currentPost) {
         
-//         if(currentPost.embed.indexOf('storage.googleapis.com') > -1) {
-//             return false;
-//         }else if (currentPost.embed.indexOf('youtube.com') > -1) {
-//             return false;
-//         } else if (currentPost.embed.indexOf('<iframe') > -1) {
-//             return false;
-//         } 
-//     }
+    //     if(currentPost.embed.indexOf('storage.googleapis.com') > -1) {
+    //         return false;
+    //     }else if (currentPost.embed.indexOf('youtube.com') > -1) {
+    //         return true;
+    //     } else if (currentPost.embed.indexOf('<iframe') > -1) {
+    //         return true;
+    //     } 
+    // }
 
   }
+
+//   $scope.handleIframeError = function(evt) {
+//       console.log("iframe error = ", evt);
+//       return;
+//   }
+
+//   $scope.handleIframeMetadata = function(index) {
+//       console.log('metadata evnt = ', index);
+//       var iframe = document.getElementById("iframe"+index);
+//         var elmnt = iframe.contentWindow.document.getElementsByTagName("video");
+//         elmnt.removeAttr("autoplay");
+//     //   if(sel) {
+//     //     $timeout(function() {
+//     //         $('#iframe'+index + ' video').removeAttr('autoplay');
+//     //     }, 0)
+//     //     }
+//       return;
+//   }
 
 }]);

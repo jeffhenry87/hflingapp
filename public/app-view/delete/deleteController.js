@@ -201,7 +201,7 @@ app.controller('DeleteController', ['$rootScope','$scope', '$location', 'HttpSer
                 $scope.created = $rootScope.currentPost.data.created;
                 $scope.files = $rootScope.currentPost.data.files;
                 $rootScope.loading = false;
-                if($scope.files.length > 0){
+                if($scope.files && $scope.files.length > 0){
                     $scope.mainImage = $scope.files[0].url;
                 }
             }else{
