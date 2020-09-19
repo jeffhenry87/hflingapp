@@ -247,11 +247,19 @@
                     </a>
 
                     <div class="gallery_slider clearfix" ng-if="!item.files.length && item.embed" style="padding-bottom:15px;">
-                      <div class="galery_full" style="margin: 12px 0 0 5px">
-                          <iframe ng-if="true" width="560" height="315" src="{{getEmbedData(item)}}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                          <!-- <div ng-if="false" ng-bind-html="{{getEmbedData(item)}} | unsafe"></div> -->
+                      <div ng-init="getEmbedData(item)" class="galery_full" style="margin: 12px 0 0 5px">
+                          
+                          <iframe id="iframe{{$index}}" width="560" height="315" src="{{item.videoUrl}}" frameborder="0" 
+                          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+                          ng-if="item.showIframe" allowfullscreen></iframe>
+
+                          <div ng-if="!item.showIframe">
+                              <video controls width="375" height="315" style="background: black;">
+                                  <source src="{{item.videoUrl}}" type="video/mp4">
+                              </video>
+                          </div>
                       </div>
-                    </div>
+                  </div>
 
                     <div class="linkBlock" ng-show="!item.files[0].secure_url && item.sharedLink">
                         <a href="{{item.sharedData.url}}" target="_blank" class="mobileMaxWidth">

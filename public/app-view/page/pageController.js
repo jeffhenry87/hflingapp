@@ -366,23 +366,23 @@ app.controller('PageController', ['$rootScope','$scope','$location' ,'HttpServic
     }
 
     $scope.getEmbedData = function(currentPost) {
-
         var embed = (currentPost.embed ? currentPost.embed.replace("xxx=", "src=").replace("yyyy=", "href=") : '');
         $scope.embedDescription = currentPost.embedDescription || '';
         if(embed.indexOf('storage.googleapis.com') > -1) {
-            $scope.iframe = false;
+            currentPost.showIframe = false;
         } else if (embed.indexOf('<iframe') > -1) {
             var embedArr = currentPost.embed.split('xxx="');
             embedArr = embedArr[1].split('"');
             embed = embedArr[0];
-            $scope.iframe = true;
+            currentPost.showIframe = true;
         } else {
-          $scope.iframe = false;
+          currentPost.showIframe = true;
           if (embed.indexOf('youtube.com') > -1) {
             embed = 'https://www.youtube.com/embed/' + embed.slice(embed.indexOf('v=')+2, embed.length);
           }
         }
-        return embed;
+        currentPost.videoUrl = embed;
+        return ;
     }
 
     $scope.subscribe = function (){
